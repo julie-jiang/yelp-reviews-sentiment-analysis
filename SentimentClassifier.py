@@ -45,9 +45,9 @@ class SentimentClassifier:
         successfully initialized. Otherwise, ValueError will be raised.
 
         '''
-        if model and not path_to_model:
+        if model and not saved_model:
             self.model = model
-        elif path_to_model and not model:
+        elif saved_model and not model:
             self.model = pickle.load(open(path_to_model, "rb"))
         else:
             raise ValueError
@@ -73,7 +73,7 @@ class SentimentClassifier:
         #confusion matrix. The keys are classification labels. 
         confusion = defaultdict(lambda: defaultdict(float))
         for dataset in datasets:
-            with open(dataset) as inFile
+            with open(dataset) as inFile:
                 for line in inFile:
                     datum = json.loads(line)
                     text, label = datum["text"], datum["label"]
